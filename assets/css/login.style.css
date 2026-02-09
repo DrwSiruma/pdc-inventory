@@ -1,0 +1,29 @@
+:root{
+    --dunkin-orange:#F58220;
+    --dunkin-pink:#FF3A82;
+    --dunkin-magenta:#E11383;
+    --dunkin-brown: #673716;
+    --dunkin-cream: #FFFDD0;
+    --card-radius:1.25rem;
+}
+body {
+    font-family: 'Rubik', system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    background: var(--dunkin-cream);
+    height: 100vh;
+}
+.login-card {
+    border-radius: 12px;
+}
+.system-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.btn-magenta {
+    background-color: var(--dunkin-magenta);
+    border: none;
+    color: #fff;
+}
+.btn-magenta:hover {
+    background-color: #bd0c6d;
+    color: #fff;
+}
