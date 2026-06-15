@@ -26,6 +26,14 @@ html, body {
     padding-top: 1rem;
 }
 
+.sidebar ul {
+    flex: 0 0 auto;
+}
+
+.sidebar .logout-area {
+    margin-top: auto;   /* pushes logout to bottom */
+}
+
 .bg-purple {
     background: #7b2c82;
 }

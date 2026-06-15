@@ -26,6 +26,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="variance.php" class="nav-link">
+                <i class="bi bi-graph-up-arrow"></i> Variances
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="expiry.php" class="nav-link">
                 <i class="bi bi-hourglass-split"></i> Expiry Monitoring
             </a>
@@ -38,7 +43,7 @@
     </ul>
 
     <!-- Divider -->
-    <hr class="text-white opacity-50 my-3">
+    <hr class="text-white opacity-90 my-3">
 
     <ul class="nav flex-column">
         <li class="nav-item">
