@@ -1,0 +1,3 @@
+<?php
+requireLogin();
+requireRole('warehouse');

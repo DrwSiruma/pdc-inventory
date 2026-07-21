@@ -1,29 +1,160 @@
 :root{
-    --dunkin-orange:#F58220;
-    --dunkin-pink:#FF3A82;
-    --dunkin-magenta:#E11383;
-    --dunkin-brown: #673716;
-    --dunkin-cream: #FFFDD0;
-    --card-radius:1.25rem;
+
+    --purple:#6F2C91;
+    --orange:#F58220;
+    --bg:#F6F7FB;
+    --text:#2F3542;
+
 }
-body {
-    font-family: 'Rubik', system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-    background: var(--dunkin-cream);
-    height: 100vh;
+
+*{
+
+    font-family:'Rubik',sans-serif;
+
 }
-.login-card {
-    border-radius: 12px;
+
+body{
+
+    /* background:linear-gradient(135deg,#6F2C91,#8A3BAE); */
+    background:linear-gradient(135deg,#5b2d90,#7b2cbf,#8f4ad0);
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
 }
-.system-title {
-    font-weight: 600;
-    letter-spacing: 0.5px;
+
+.login-wrapper{
+
+    width:100%;
+    padding:20px;
+
 }
-.btn-magenta {
-    background-color: var(--dunkin-magenta);
-    border: none;
-    color: #fff;
+
+.login-card{
+
+    width:100%;
+
+    max-width:480px;
+
+    margin:auto;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:40px;
+
+    animation:fadeIn .4s ease;
+
 }
-.btn-magenta:hover {
-    background-color: #bd0c6d;
-    color: #fff;
+
+.logo{
+
+    width:90px;
+
+}
+
+.system-title{
+
+    color:var(--purple);
+
+    font-weight:700;
+
+}
+
+.system-subtitle{
+
+    color:#777;
+
+    margin-top:-5px;
+
+    font-size:14px;
+
+}
+
+.form-control{
+
+    border-radius:10px;
+
+    height:48px;
+
+}
+
+.form-control:focus{
+
+    border-color:var(--purple);
+
+    box-shadow:0 0 0 .15rem rgba(111,44,145,.15);
+
+}
+
+.btn-primary{
+
+    background:var(--purple);
+
+    border:none;
+
+    height:52px;
+    
+    font-size:16px;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--orange);
+
+}
+
+.footer-text{
+
+    color:#777;
+
+    font-size:13px;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@media(max-width:576px){
+
+.login-card{
+
+    padding:30px 22px;
+
+}
+
+.logo{
+
+    width:70px;
+
+}
+
 }

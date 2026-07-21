@@ -1,16 +1,42 @@
 <?php
-$conn_error='Could not Connect.';
-$mysql_host='localhost';
-$mysql_user='root';
-$mysql_pass='';
-$mysql_db='pdc_inventory';
 
-// Create connection
-$conn = new mysqli($mysql_host, $mysql_user, $mysql_pass, $mysql_db);
+/*
+|--------------------------------------------------------------------------
+| Database Connection
+|--------------------------------------------------------------------------
+| This file establishes the MySQL database connection.
+|--------------------------------------------------------------------------
+*/
 
-// Check connection
+require_once 'config.php';
+
+/*
+|--------------------------------------------------------------------------
+| Create Database Connection
+|--------------------------------------------------------------------------
+*/
+
+$conn = new mysqli(
+    DB_HOST,
+    DB_USER,
+    DB_PASS,
+    DB_NAME
+);
+
+/*
+|--------------------------------------------------------------------------
+| Check Connection
+|--------------------------------------------------------------------------
+*/
+
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die('Database connection failed.');
 }
- 
-?>
+
+/*
+|--------------------------------------------------------------------------
+| Character Set
+|--------------------------------------------------------------------------
+*/
+
+$conn->set_charset('utf8mb4');

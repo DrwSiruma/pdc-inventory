@@ -1,56 +1,53 @@
 <?php
-include('connection.php');
-session_start();
 
-function logAudit($conn, $user_id, $action, $module, $reference_id = null, $description = '') {
+/*
+|--------------------------------------------------------------------------
+| Logout User
+|--------------------------------------------------------------------------
+| Terminates the current session and records the logout activity.
+|--------------------------------------------------------------------------
+*/
 
-    $ip = $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/connection.php';
+require_once __DIR__ . '/session.php';
+require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/flash.php';
+require_once __DIR__ . '/audit.php';
 
-    $sql = "INSERT INTO audit_logs 
-            (user_id, action, module, reference_id, description, ip_address)
-            VALUES (?, ?, ?, ?, ?, ?)";
+/*
+|--------------------------------------------------------------------------
+| Record Logout Activity
+|--------------------------------------------------------------------------
+*/
 
-    $stmt = $conn->prepare($sql);
-
-    if (!$stmt) {
-        error_log("Audit Log Error - Prepare failed: " . $conn->error);
-        return false;
-    }
-
-    $stmt->bind_param(
-        "ississ",
-        $user_id,
-        $action,
-        $module,
-        $reference_id,
-        $description,
-        $ip
-    );
-
-    if (!$stmt->execute()) {
-        error_log("Audit Log Error - Execute failed: " . $stmt->error);
-        return false;
-    }
-
-    $stmt->close();
-    return true;
-}
-
-// Log logout BEFORE destroying session
 if (isset($_SESSION['user_id'])) {
+
     logAudit(
-        $conn,
-        $_SESSION['user_id'],
         'LOGOUT',
         'Authentication',
         null,
-        'User logged out successfully'
+        'User logged out from the system.'
     );
+
 }
 
+/*
+|--------------------------------------------------------------------------
+| Destroy Session
+|--------------------------------------------------------------------------
+*/
+
 session_unset();
+
 session_destroy();
 
-header("Location: /pdc-inventory/pages/login");
-exit();
+/*
+|--------------------------------------------------------------------------
+| Redirect to Login
+|--------------------------------------------------------------------------
+*/
+
+redirect('/pages/login.php');
+
 ?>

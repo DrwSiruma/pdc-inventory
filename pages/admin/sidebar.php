@@ -6,7 +6,7 @@
 
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a href="dashboard.php" class="nav-link active">
+            <a href="dashboard" class="nav-link active">
                 <i class="bi bi-speedometer2"></i> Dashboard
             </a>
         </li>
