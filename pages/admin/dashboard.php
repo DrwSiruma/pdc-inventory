@@ -2,9 +2,9 @@
 
 /*
 |--------------------------------------------------------------------------
-| Admin Dashboard (Temporary Mockup)
+| Administrator Dashboard
 |--------------------------------------------------------------------------
-| Used for testing authentication, sessions and logout.
+| Dashboard Landing Page
 |--------------------------------------------------------------------------
 */
 
@@ -16,148 +16,190 @@ require_once '../../includes/functions.php';
 require_once '../../includes/flash.php';
 require_once '../../includes/auth.php';
 
+requireLogin();
 requireRole('super_admin');
 
+$pageTitle = "Dashboard";
+
+$breadcrumbs = [
+
+    [
+        'title' => 'Dashboard'
+    ]
+
+];
+
+include '../../includes/layout/header.php';
+include '../../includes/layout/sidebar.php';
+include '../../includes/layout/topbar.php';
+include '../../includes/layout/breadcrumb.php';
+
 ?>
+<div class="main-content">
+    <div class="container-fluid">
 
-<!DOCTYPE html>
-<html lang="en">
+        <?php showFlash(); ?>
 
-<head>
+        <div class="row">
 
-    <meta charset="UTF-8">
+            <div class="col-lg-12">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1">
+                <div class="card mb-4">
 
-    <title>
+                    <div class="card-body">
 
-        Admin Dashboard
+                        <h3 class="mb-2">
 
-    </title>
+                            Welcome back,
+                            <strong><?= htmlspecialchars($_SESSION['fullname']); ?></strong>
 
-    <link rel="icon"
-          href="../../assets/img/favicon.png">
+                        </h3>
 
-    <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css"
-          rel="stylesheet">
+                        <p class="text-muted mb-0">
 
-    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css"
-          rel="stylesheet">
+                            Panda Development Corporation Inventory Management System
 
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
-          rel="stylesheet">
-
-    <style>
-
-        body{
-
-            background:#f4f5f9;
-
-            font-family:'Rubik',sans-serif;
-
-        }
-
-        .card{
-
-            border:none;
-
-            border-radius:15px;
-
-        }
-
-        .profile-box{
-
-            background:white;
-
-            padding:30px;
-
-            border-radius:15px;
-
-            box-shadow:0 5px 15px rgba(0,0,0,.08);
-
-        }
-
-        .badge-role{
-
-            font-size:15px;
-
-            padding:8px 15px;
-
-        }
-
-        .info-table td{
-
-            padding:8px;
-
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-<div class="container py-5">
-
-    <div class="row justify-content-center">
-
-        <div class="col-lg-9">
-
-            <?php showFlash(); ?>
-
-            <div class="profile-box">
-
-                <div class="d-flex justify-content-between align-items-center mb-4">
-
-                    <div>
-
-                        <h2 class="mb-1">
-
-                            Welcome,
-
-                            <?= htmlspecialchars($_SESSION['fullname']); ?>
-
-                        </h2>
-
-                        <small class="text-muted">
-
-                            <?= SYSTEM_NAME ?>
-
-                        </small>
+                        </p>
 
                     </div>
 
-                    <a href="../../includes/logout.php"
-                       class="btn btn-danger">
+                </div>
 
-                        <i class="bi bi-box-arrow-right"></i>
+            </div>
 
-                        Logout
+        </div>
 
-                    </a>
+        <!-- Statistics -->
+
+        <div class="row">
+
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h6 class="text-muted">
+
+                            Total Users
+
+                        </h6>
+
+                        <h2>
+
+                            0
+
+                        </h2>
+
+                    </div>
 
                 </div>
 
-                <hr>
+            </div>
 
-                <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
 
-                    <div class="col-md-6">
+                <div class="card">
 
-                        <table class="table info-table">
+                    <div class="card-body">
+
+                        <h6 class="text-muted">
+
+                            Products
+
+                        </h6>
+
+                        <h2>
+
+                            0
+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h6 class="text-muted">
+
+                            Locations
+
+                        </h6>
+
+                        <h2>
+
+                            0
+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h6 class="text-muted">
+
+                            Reports
+
+                        </h6>
+
+                        <h2>
+
+                            0
+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- User Information -->
+
+        <div class="row">
+
+            <div class="col-lg-6 mb-4">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        Logged-in User
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <table class="table table-borderless mb-0">
 
                             <tr>
 
-                                <td width="170">
+                                <th width="170">
 
-                                    <strong>User ID</strong>
+                                    Employee No
 
-                                </td>
+                                </th>
 
                                 <td>
 
-                                    <?= $_SESSION['user_id']; ?>
+                                    <?= htmlspecialchars($_SESSION['employee_no']); ?>
 
                                 </td>
 
@@ -165,27 +207,11 @@ requireRole('super_admin');
 
                             <tr>
 
-                                <td>
+                                <th>
 
-                                    <strong>Employee No</strong>
+                                    Full Name
 
-                                </td>
-
-                                <td>
-
-                                    <?= $_SESSION['employee_no']; ?>
-
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td>
-
-                                    <strong>Full Name</strong>
-
-                                </td>
+                                </th>
 
                                 <td>
 
@@ -197,11 +223,11 @@ requireRole('super_admin');
 
                             <tr>
 
-                                <td>
+                                <th>
 
-                                    <strong>Username</strong>
+                                    Username
 
-                                </td>
+                                </th>
 
                                 <td>
 
@@ -211,77 +237,17 @@ requireRole('super_admin');
 
                             </tr>
 
-                        </table>
-
-                    </div>
-
-                    <div class="col-md-6">
-
-                        <table class="table info-table">
-
                             <tr>
 
-                                <td width="170">
+                                <th>
 
-                                    <strong>Role</strong>
+                                    Role
 
-                                </td>
-
-                                <td>
-
-                                    <span class="badge bg-success badge-role">
-
-                                        <?= strtoupper($_SESSION['role']); ?>
-
-                                    </span>
-
-                                </td>
-
-                            </tr>
-
-                            <tr>
+                                </th>
 
                                 <td>
 
-                                    <strong>Location ID</strong>
-
-                                </td>
-
-                                <td>
-
-                                    <?= $_SESSION['location_id']; ?>
-
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td>
-
-                                    <strong>Session ID</strong>
-
-                                </td>
-
-                                <td style="font-size:12px;">
-
-                                    <?= session_id(); ?>
-
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td>
-
-                                    <strong>Server Time</strong>
-
-                                </td>
-
-                                <td>
-
-                                    <?= date('F d, Y h:i:s A'); ?>
+                                    <?= ucwords(str_replace('_',' ',$_SESSION['role'])); ?>
 
                                 </td>
 
@@ -293,31 +259,110 @@ requireRole('super_admin');
 
                 </div>
 
-                <hr>
+            </div>
 
-                <div class="alert alert-success mb-0">
+            <div class="col-lg-6 mb-4">
 
-                    <h5>
+                <div class="card">
 
-                        <i class="bi bi-check-circle-fill"></i>
+                    <div class="card-header">
 
-                        Authentication Successful
+                        Quick Actions
 
-                    </h5>
+                    </div>
 
-                    <p class="mb-0">
+                    <div class="card-body">
 
-                        If you can see this page,
+                        <a href="#" class="btn btn-primary mb-2">
 
-                        your login,
+                            <i class="bi bi-person-plus-fill"></i>
 
-                        session,
+                            Create User
 
-                        authorization,
+                        </a>
 
-                        and role validation are working correctly.
+                        <br>
 
-                    </p>
+                        <a href="#" class="btn btn-success mb-2">
+
+                            <i class="bi bi-box-seam"></i>
+
+                            Add Product
+
+                        </a>
+
+                        <br>
+
+                        <a href="#" class="btn btn-warning mb-2">
+
+                            <i class="bi bi-geo-alt-fill"></i>
+
+                            Manage Locations
+
+                        </a>
+
+                        <br>
+
+                        <a href="#" class="btn btn-info">
+
+                            <i class="bi bi-bar-chart-fill"></i>
+
+                            View Reports
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Recent Activities -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                Recent Activities
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-striped">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Date</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Module</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td colspan="4" class="text-center text-muted">
+
+                                    No records available.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
@@ -329,8 +374,8 @@ requireRole('super_admin');
 
 </div>
 
-<script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<?php
 
-</body>
+include '../../includes/layout/footer.php';
 
-</html>
+?>

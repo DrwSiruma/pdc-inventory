@@ -69,3 +69,14 @@ function generateReferenceNo($prefix, $number)
 {
     return strtoupper($prefix) . '-' . date('Ymd') . '-' . str_pad($number, 4, '0', STR_PAD_LEFT);
 }
+
+/*
+|--------------------------------------------------------------------------
+| Active Sidebar Menu
+|--------------------------------------------------------------------------
+*/
+
+function isMenuActive($page)
+{
+    return basename($_SERVER['PHP_SELF']) == $page ? 'active' : '';
+}

@@ -4,7 +4,7 @@
 |--------------------------------------------------------------------------
 | Master Header
 |--------------------------------------------------------------------------
-| Shared by all pages.
+| Shared Header Layout
 |--------------------------------------------------------------------------
 */
 
@@ -22,11 +22,11 @@ if (!isset($pageTitle)) {
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?= SYSTEM_SHORT_NAME ?> | <?= htmlspecialchars($pageTitle) ?></title>
+    <title><?= SYSTEM_SHORT_NAME; ?> | <?= htmlspecialchars($pageTitle); ?></title>
 
+    <!-- Favicon -->
     <link rel="icon"
           type="image/png"
           href="<?= BASE_URL ?>/assets/img/favicon.png">
@@ -39,14 +39,6 @@ if (!isset($pageTitle)) {
     <link rel="stylesheet"
           href="<?= BASE_URL ?>/assets/vendor/bootstrap-icons/bootstrap-icons.css">
 
-    <!-- Main Styles -->
-    <link rel="stylesheet"
-          href="<?= BASE_URL ?>/assets/css/main.style.css">
-
-    <!-- Admin Styles -->
-    <link rel="stylesheet"
-          href="<?= BASE_URL ?>/assets/css/admin.style.css">
-
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -56,6 +48,49 @@ if (!isset($pageTitle)) {
 
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
+
+    <!-- Layout CSS -->
+    <link rel="stylesheet"
+          href="<?= BASE_URL ?>/assets/css/layout.style.css">
+
+    <?php
+    /*
+    |--------------------------------------------------------------------------
+    | Module CSS
+    |--------------------------------------------------------------------------
+    | Automatically load CSS based on current role.
+    |--------------------------------------------------------------------------
+    */
+
+    if(isset($_SESSION['role'])){
+
+        switch($_SESSION['role']){
+
+            case 'super_admin':
+                echo '<link rel="stylesheet" href="'.BASE_URL.'/assets/css/admin.style.css">';
+                break;
+
+            case 'accounting':
+                echo '<link rel="stylesheet" href="'.BASE_URL.'/assets/css/accounting.style.css">';
+                break;
+
+            case 'warehouse':
+                echo '<link rel="stylesheet" href="'.BASE_URL.'/assets/css/warehouse.style.css">';
+                break;
+
+            case 'store':
+                echo '<link rel="stylesheet" href="'.BASE_URL.'/assets/css/store.style.css">';
+                break;
+
+            case 'spectator':
+                echo '<link rel="stylesheet" href="'.BASE_URL.'/assets/css/spectator.style.css">';
+                break;
+
+        }
+
+    }
+
+    ?>
 
 </head>
 
