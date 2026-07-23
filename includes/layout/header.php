@@ -39,6 +39,9 @@ if (!isset($pageTitle)) {
     <link rel="stylesheet"
           href="<?= BASE_URL ?>/assets/vendor/bootstrap-icons/bootstrap-icons.css">
 
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/vendor/datatables/jquery.dataTables.min.css">
+
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 

@@ -65,8 +65,22 @@
 <!-- Bootstrap -->
 <script src="<?= BASE_URL ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+<!-- DataTables -->
+<script src="<?= BASE_URL ?>/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+<!-- <script src="<?= BASE_URL ?>/assets/vendor/datatables/jquery.min.js"></script>
+<script src="<?= BASE_URL ?>/assets/vendor/datatables/jquerys.min.js"></script>
+<script src="<?= BASE_URL ?>/assets/vendor/datatables/jquery-3.5.1.js"></script> -->
+
 <!-- Layout Script -->
 <script src="<?= BASE_URL ?>/assets/js/layout.js"></script>
+
+<?php
+    if (isset($_SESSION['role']) && $_SESSION['role'] == 'super_admin') {
+    ?>
+    <script src="<?= BASE_URL ?>/assets/js/admin.js"></script>
+    <?php
+    }
+?>
 
 </body>
 

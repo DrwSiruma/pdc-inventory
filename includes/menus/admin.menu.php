@@ -34,7 +34,7 @@ Administration
 
 </li>
 
-<li>
+<li class="<?= isMenuActive('index.php', 'users'); ?>">
 
     <a href="<?= BASE_URL ?>/pages/admin/users/">
 

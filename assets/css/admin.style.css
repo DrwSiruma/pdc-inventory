@@ -1,13 +1,11 @@
-.sidebar {
-    /* width: 250px; */
-    /* position: fixed; */
-    /* top: 0; */
-    /* left: 0; */
-    /* bottom: 0; */
-    /* height: 100vh; */
-    /* overflow-y: auto; */
-    /* -webkit-overflow-scrolling: touch; */
-    /* z-index: 1040; */
-    /* box-sizing: border-box; */
-    /* padding-top: 1rem; */
+.table-hover tbody tr{
+
+    transition:.2s;
+
+}
+
+.table-hover tbody tr:hover{
+
+    background:#eef5ff;
+
 }
