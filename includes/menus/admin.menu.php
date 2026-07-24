@@ -138,7 +138,7 @@ Account
 
 <li>
 
-    <a href="#">
+    <a href="<?= BASE_URL ?>/pages/account/profile.php">
 
         <i class="bi bi-person-circle"></i>
 
@@ -150,7 +150,7 @@ Account
 
 <li>
 
-    <a href="#">
+    <a href="<?= BASE_URL ?>/pages/account/change_password.php">
 
         <i class="bi bi-key-fill"></i>
 

@@ -97,19 +97,15 @@ $user = currentUser();
 
                 <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="<?= BASE_URL ?>/pages/account/profile.php">
 
-                    <i class="bi bi-person mr-2"></i>
-
-                    My Profile
+                    <i class="bi bi-person mr-2"></i>&nbsp;My Profile
 
                 </a>
 
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="<?= BASE_URL ?>/pages/account/change_password.php">
 
-                    <i class="bi bi-key mr-2"></i>
-
-                    Change Password
+                    <i class="bi bi-key me-2"></i>&nbsp;Change Password
 
                 </a>
 
