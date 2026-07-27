@@ -80,6 +80,11 @@
     <script src="<?= BASE_URL ?>/assets/js/admin.js"></script>
     <?php
     }
+    elseif (isset($_SESSION['role']) && $_SESSION['role'] == 'accounting') {
+    ?>
+    <script src="<?= BASE_URL ?>/assets/js/accounting.js"></script>
+    <?php
+    }
 ?>
 
 </body>
