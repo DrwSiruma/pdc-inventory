@@ -16,9 +16,10 @@ require_once '../../../includes/no_cache.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
 require_once '../../../includes/audit.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
 
 function redirectToInventory($inventoryHeaderId)
 {
@@ -54,7 +55,7 @@ $generated = false;
 try {
     /* Lock the header first so two Accounting users cannot generate it twice. */
     $headerStmt = $conn->prepare(
-        'SELECT inventory_header_id, business_date, business_status
+        'SELECT inventory_header_id, business_date, business_status, location_id
          FROM product_inventory_header
          WHERE inventory_header_id = ?
          FOR UPDATE'
@@ -75,6 +76,7 @@ try {
     if (!$header) {
         throw new Exception('Inventory record not found.');
     }
+    enforceStorePermission($conn, (int) $header['location_id']);
 
     if ($header['business_status'] !== 'verified') {
         throw new Exception('Inventory must be verified before its variance can be generated.');

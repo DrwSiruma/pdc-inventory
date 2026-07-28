@@ -15,9 +15,10 @@ require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
 require_once '../../../includes/audit.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,19 @@ $inventory_date = trim($_POST['inventory_date']);
 $product_id = (int) $_POST['product_id'];
 
 $location_id = (int) $_POST['location_id'];
+enforceStorePermission($conn, $location_id);
+
+$existingStmt = $conn->prepare("SELECT location_id FROM beginning_inventory WHERE beginning_id = ? LIMIT 1");
+$existingStmt->bind_param("i", $beginning_id);
+$existingStmt->execute();
+$existingInventory = $existingStmt->get_result()->fetch_assoc();
+$existingStmt->close();
+if (!$existingInventory) {
+    setFlash('danger', 'Beginning inventory record not found.');
+    header('Location: index.php');
+    exit;
+}
+enforceStorePermission($conn, (int) $existingInventory['location_id']);
 
 $quantity = (float) $_POST['quantity'];
 

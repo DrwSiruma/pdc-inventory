@@ -14,9 +14,19 @@ require_once '../../includes/session.php';
 require_once '../../includes/no_cache.php';
 require_once '../../includes/functions.php';
 require_once '../../includes/auth.php';
+require_once '../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
+
+/*
+|--------------------------------------------------------------------------
+| Store Permission
+|--------------------------------------------------------------------------
+*/
+
+$assignedStores = getAccessibleStoreIds($conn);
+$storeFilter = buildStoreWhereClause($assignedStores);
 
 $pageTitle = "Accounting Dashboard";
 $breadcrumbs = [
@@ -40,6 +50,8 @@ include '../../includes/layout/breadcrumb.php';
 $beginning_inventory = $conn->query("
     SELECT COUNT(*)
     FROM beginning_inventory
+    WHERE 1=1
+    {$storeFilter}
 ")->fetch_row()[0];
 
 $pdr_count = 0;

@@ -15,9 +15,13 @@ require_once '../../../includes/no_cache.php';
 require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
+
+$assignedStores = getAccessibleStoreIds($conn);
+$storeFilter = buildStoreWhereClause($assignedStores, 'h.location_id');
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +46,8 @@ $storeResult = $conn->query("
         location_id,
         location_name
     FROM locations
+    WHERE 1=1
+    " . buildStoreWhereClause($assignedStores) . "
     ORDER BY location_name
 ");
 
@@ -70,6 +76,7 @@ WHERE h.business_status IN
     'approved',
     'locked'
 )
+{$storeFilter}
 ";
 
 $params = [];

@@ -15,9 +15,10 @@ require_once '../../../includes/no_cache.php';
 require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,7 @@ if (!$header) {
     header('Location: index.php');
     exit;
 }
+enforceStorePermission($conn, (int) $header['location_id']);
 
 /*
 |--------------------------------------------------------------------------

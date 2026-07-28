@@ -13,9 +13,10 @@ require_once '../../../includes/no_cache.php';
 require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,18 @@ $throwaway_ids  = $_POST['throwaway_id'] ?? [];
 $product_ids    = $_POST['product_id'] ?? [];
 $accounting_qty = $_POST['accounting_qty'] ?? [];
 $remarks        = $_POST['remarks'] ?? [];
+
+$headerStmt = $conn->prepare("SELECT location_id FROM product_inventory_header WHERE inventory_header_id = ? LIMIT 1");
+$headerStmt->bind_param("i", $inventory_header_id);
+$headerStmt->execute();
+$header = $headerStmt->get_result()->fetch_assoc();
+$headerStmt->close();
+if (!$header) {
+    setFlash('danger', 'Record not found.');
+    header('Location: index.php');
+    exit;
+}
+enforceStorePermission($conn, (int) $header['location_id']);
 
 /*
 |--------------------------------------------------------------------------

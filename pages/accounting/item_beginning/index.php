@@ -15,9 +15,13 @@ require_once '../../../includes/no_cache.php';
 require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
+
+$assignedStores = getAccessibleStoreIds($conn);
+$storeFilter = buildStoreWhereClause($assignedStores, 'b.location_id');
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +41,8 @@ $result = $conn->query("
         ON p.product_id = b.product_id
     INNER JOIN locations l
         ON l.location_id = b.location_id
+    WHERE 1=1
+    {$storeFilter}
     ORDER BY
         b.inventory_date DESC,
         p.product_name ASC

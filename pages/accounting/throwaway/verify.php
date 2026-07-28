@@ -13,9 +13,10 @@ require_once '../../../includes/no_cache.php';
 require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     setFlash(
@@ -26,6 +27,17 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     exit;
 }
 $inventory_header_id = (int)$_GET['id'];
+$headerStmt = $conn->prepare("SELECT location_id FROM product_inventory_header WHERE inventory_header_id = ? LIMIT 1");
+$headerStmt->bind_param("i", $inventory_header_id);
+$headerStmt->execute();
+$header = $headerStmt->get_result()->fetch_assoc();
+$headerStmt->close();
+if (!$header) {
+    setFlash('danger', 'Record not found.');
+    header('Location: index.php');
+    exit;
+}
+enforceStorePermission($conn, (int) $header['location_id']);
 $conn->begin_transaction();
 
 try {

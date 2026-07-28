@@ -15,9 +15,10 @@ require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
 require_once '../../../includes/audit.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ requireRole('accounting');
 $inventory_date = trim($_POST['inventory_date']);
 $product_id = (int) $_POST['product_id'];
 $location_id = (int) $_POST['location_id'];
+enforceStorePermission($conn, $location_id);
 $quantity = (float) $_POST['quantity'];
 $expiry_date = !empty($_POST['expiry_date'])
     ? $_POST['expiry_date']

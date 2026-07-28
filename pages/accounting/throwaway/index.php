@@ -15,9 +15,13 @@ require_once '../../../includes/no_cache.php';
 require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
+
+$assignedStores = getAccessibleStoreIds($conn);
+$storeFilter = buildStoreWhereClause($assignedStores, 'pih.location_id');
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +44,7 @@ $stores = $conn->query("
         location_name
     FROM locations
     WHERE status='active'
+    " . buildStoreWhereClause($assignedStores) . "
     ORDER BY location_name
 ");
 
@@ -65,6 +70,7 @@ LEFT JOIN product_throwaway pt
     ON pt.inventory_header_id = pih.inventory_header_id
 WHERE
     pih.business_date = ?
+    {$storeFilter}
 ";
 $params = [];
 $types = "";

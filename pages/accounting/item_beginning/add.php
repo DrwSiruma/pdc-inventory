@@ -15,9 +15,12 @@ require_once '../../../includes/no_cache.php';
 require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
+
+$assignedStores = getAccessibleStoreIds($conn);
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +52,7 @@ $locations = $conn->query("
         location_name
     FROM locations
     WHERE status = 'active'
+    " . buildStoreWhereClause($assignedStores) . "
     ORDER BY location_name ASC
 ");
 
@@ -93,7 +97,7 @@ include '../../../includes/layout/breadcrumb.php';
                         </div>
                         <div class="col-md-5 mb-3">
                             <label class="form-label">Product<span class="text-danger">*</span></label>
-                            <select name="product_id" id="product_id" class="form-select" required>
+                            <select name="product_id" id="product_id" class="form-control" required>
                                 <option value="">-- Select Product --</option>
                                 <?php while ($product = $products->fetch_assoc()) : ?>
                                 <option value="<?= $product['product_id']; ?>" data-expiry="<?= $product['expiry_required']; ?>">
@@ -104,7 +108,7 @@ include '../../../includes/layout/breadcrumb.php';
                         </div>
                         <div class="col-md-4 mb-3">
                             <label class="form-label">Store / Location<span class="text-danger">*</span></label>
-                            <select name="location_id" class="form-select" required>
+                            <select name="location_id" class="form-control" required>
                                 <option value="">-- Select Location --</option>
                                 <?php while ($location = $locations->fetch_assoc()) : ?>
                                 <option value="<?= $location['location_id']; ?>">

@@ -16,9 +16,10 @@ require_once '../../../includes/no_cache.php';
 require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ SELECT
     h.business_date,
     h.business_status,
     h.generated_at,
+    h.location_id,
     l.location_name,
     submitter.full_name AS submitted_by,
     verifier.full_name AS verified_by,
@@ -74,6 +76,7 @@ if (!$header) {
     header('Location: index.php');
     exit;
 }
+enforceStorePermission($conn, (int) $header['location_id']);
 
 /*
 |--------------------------------------------------------------------------

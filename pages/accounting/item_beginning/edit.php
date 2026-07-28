@@ -15,9 +15,10 @@ require_once '../../../includes/no_cache.php';
 require_once '../../../includes/functions.php';
 require_once '../../../includes/flash.php';
 require_once '../../../includes/auth.php';
+require_once '../../../includes/store_permission.php';
 
 requireLogin();
-requireRole('accounting');
+requireRole(['accounting', 'super_admin']);
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,9 @@ if ($result->num_rows == 0) {
 }
 $inventory = $result->fetch_assoc();
 $stmt->close();
+enforceStorePermission($conn, (int) $inventory['location_id']);
+
+$assignedStores = getAccessibleStoreIds($conn);
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +99,7 @@ $locations = $conn->query("
         location_name
     FROM locations
     WHERE status = 'active'
+    " . buildStoreWhereClause($assignedStores) . "
     ORDER BY location_name ASC
 ");
 

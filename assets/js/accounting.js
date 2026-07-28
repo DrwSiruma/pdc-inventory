@@ -102,3 +102,129 @@ $(document).ready(function(){
         }
     });
 });
+
+$(document).ready(function(){
+    $('#historyTable2').DataTable({
+        responsive: true,
+        autoWidth: false,
+        pageLength: 25,
+        order: [
+            [0,'desc']
+        ],
+        columnDefs: [
+            {
+                orderable: false,
+                searchable: false,
+                targets: [7]
+            }
+        ],
+        language: {
+            emptyTable: 'No generated or locked business days found.',
+            zeroRecords: 'No matching business day found.',
+            search: 'Search:',
+            lengthMenu: 'Show _MENU_ records',
+            info: 'Showing _START_ to _END_ of _TOTAL_ records',
+            infoEmpty: 'No records available',
+            paginate: {
+                first: 'First',
+                last: 'Last',
+                next: 'Next',
+                previous: 'Previous'
+            }
+        }
+    });
+});$(document).ready(function(){
+    $('#historyTable').DataTable({
+        responsive: true,
+        autoWidth: false,
+        pageLength: 25,
+        order: [
+            [0,'desc']
+        ],
+        columnDefs: [
+            {
+                orderable: false,
+                searchable: false,
+                targets: [7]
+            }
+        ],
+        language: {
+            emptyTable: 'No generated or locked business days found.',
+            zeroRecords: 'No matching business day found.',
+            search: 'Search:',
+            lengthMenu: 'Show _MENU_ records',
+            info: 'Showing _START_ to _END_ of _TOTAL_ records',
+            infoEmpty: 'No records available',
+            paginate: {
+                first: 'First',
+                last: 'Last',
+                next: 'Next',
+                previous: 'Previous'
+            }
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('#dailyTable').DataTable({
+        responsive: true,
+        autoWidth: false,
+        pageLength: 25,
+        order: [
+            [0, 'asc']
+        ],
+        columnDefs: [
+            {
+                orderable: false,
+                searchable: false,
+                targets: [6]
+            }
+        ],
+        language: {
+            emptyTable: "No stores available.",
+            zeroRecords: "No matching records found.",
+            search: "Search Store:",
+            lengthMenu: "Show _MENU_ stores",
+            info: "Showing _START_ to _END_ of _TOTAL_ stores",
+            infoEmpty: "No records available",
+            paginate: {
+                first: "First",
+                last: "Last",
+                next: "Next",
+                previous: "Previous"
+            }
+        }
+    });
+});
+
+$(document).ready(function(){
+    $('#varianceHistoryTable').DataTable({
+        responsive: true,
+        autoWidth: false,
+        pageLength: 25,
+        order: [
+            [0,'desc']
+        ],
+        columnDefs: [
+            {
+                orderable: false,
+                searchable: false,
+                targets: [6]
+            }
+        ],
+        language: {
+            emptyTable: 'No variance history available.',
+            zeroRecords: 'No matching variance history found.',
+            search: 'Search:',
+            lengthMenu: 'Show _MENU_ records',
+            info: 'Showing _START_ to _END_ of _TOTAL_ records',
+            infoEmpty: 'No records available',
+            paginate: {
+                first: 'First',
+                last: 'Last',
+                next: 'Next',
+                previous: 'Previous'
+            }
+        }
+    });
+});
