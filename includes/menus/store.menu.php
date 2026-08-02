@@ -74,7 +74,7 @@ Daily Operations
 
 <li>
 
-    <a href="<?= BASE_URL ?>/pages/store/submit_business_day/">
+    <a href="<?= BASE_URL ?>/pages/store/business_day_status/">
 
         <i class="bi bi-send-check-fill"></i>
 

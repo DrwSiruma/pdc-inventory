@@ -193,3 +193,43 @@ $(document).ready(function () {
         });
     }
 });
+
+/*
+|--------------------------------------------------------------------------
+| Product Throw Away
+|--------------------------------------------------------------------------
+*/
+
+$(document).ready(function () {
+    if ($('#throwAwayTable').length) {
+        $('#throwAwayTable').DataTable({
+            responsive: true,
+            autoWidth: false,
+            pageLength: 25,
+            order: [[1, 'asc']],
+            columnDefs: [
+                {
+                    orderable: false,
+                    targets: [6]
+                }
+            ]
+        });
+    }
+});
+
+/*
+|--------------------------------------------------------------------------
+| Throw Away History
+|--------------------------------------------------------------------------
+*/
+
+$(document).ready(function () {
+    if ($('#throwAwayHistoryTable').length) {
+        $('#throwAwayHistoryTable').DataTable({
+            responsive: true,
+            autoWidth: false,
+            pageLength: 25,
+            order: [[0, 'desc']]
+        });
+    }
+});

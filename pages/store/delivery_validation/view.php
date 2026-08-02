@@ -221,7 +221,7 @@ include '../../../includes/layout/breadcrumb.php';
                                         <td><input type="text" class="form-control text-end bg-light expectedQty" value="<?= number_format($row['expected_qty'],2,'.',''); ?>" readonly></td>
                                         <td><input type="number" name="actual_qty[]" class="form-control text-end actualQty" step="0.01" min="0" value="<?= number_format($row['actual_qty'],2,'.',''); ?>" <?= $isReadOnly ? 'readonly' : ''; ?> required></td>
                                         <td><input type="text" class="form-control text-end bg-warning shortQty" value="<?= number_format($row['short_qty'],2,'.',''); ?>" readonly></td>
-                                        <td><input type="text" name="remarks[]" class="form-control" value="<?= htmlspecialchars($row['remarks']); ?>" maxlength="255"></td>
+                                        <td><input type="text" name="remarks[]" class="form-control" value="<?= htmlspecialchars($row['remarks']); ?>" maxlength="255" <?= $isReadOnly ? 'readonly' : ''; ?>></td>
                                     </tr>
                                 <?php endwhile; ?>
                             </tbody>
